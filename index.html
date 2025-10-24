@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ahmadreza Khanari — Personal Website</title>
   <meta name="description" content="Ahmadreza Khanari — Computer Engineering at Sharif University of Technology. Research in 3D computer vision, robotic perception, and language-vision models." />
-  
+
   <!-- Font Awesome -->
   <link
     rel="stylesheet"
@@ -37,6 +37,10 @@
 
     * { box-sizing:border-box; margin:0; padding:0; }
 
+    html {
+      scroll-behavior:smooth;
+    }
+
     body {
       font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
       color:var(--text);
@@ -50,6 +54,9 @@
       border-bottom:1px solid var(--border);
       color:var(--muted);
       font-size:14px;
+      position:sticky;
+      top:0;
+      z-index:1000;
     }
     .topbar-inner {
       max-width:900px;
@@ -71,7 +78,14 @@
     .navbar-wrap {
       background:var(--card);
       border-bottom:1px solid var(--border);
+      position:sticky;
+      top:34px; /* sits under topbar */
+      z-index:999;
     }
+    @media (max-width:640px){
+      .navbar-wrap { top:44px; }
+    }
+
     .navbar {
       max-width:900px;
       margin:auto;
@@ -95,6 +109,7 @@
       object-fit:cover;
       border:1px solid var(--border);
     }
+
     .nav-links {
       display:flex;
       gap:20px;
@@ -103,10 +118,14 @@
       color:var(--text);
       text-decoration:none;
       font-size:15px;
+      display:flex;
+      align-items:center;
+      gap:6px;
     }
     .nav-links a:hover {
       color:var(--accent);
     }
+
     .nav-toggle-btn {
       display:none;
       border:none;
@@ -115,6 +134,7 @@
       font-size:22px;
       cursor:pointer;
     }
+
     .mobile-menu {
       display:none;
       flex-direction:column;
@@ -126,18 +146,23 @@
       color:var(--text);
       text-decoration:none;
       border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
     .mobile-menu a:hover {
       background:#ffffff08;
       color:var(--accent);
     }
+
     @media (max-width:640px) {
       .nav-links { display:none; }
       .nav-toggle-btn { display:block; }
     }
 
-    /* Main Layout */
+    /* Layout + Cards */
     .wrap { max-width:900px; margin:auto; padding:32px 20px 80px; }
+
     header.profile-header {
       display:flex;
       align-items:center;
@@ -146,6 +171,7 @@
       background:var(--card);
       border-radius:20px;
       box-shadow:0 10px 30px #00000030;
+      margin-bottom:24px;
     }
     header.profile-header img {
       width:64px;
@@ -169,81 +195,163 @@
       font-size:13px;
     }
 
-    .row {
-      display:grid;
-      grid-template-columns:1.2fr 1fr;
-      gap:20px;
-      margin-top:20px;
-    }
-    @media (max-width:860px){ .row { grid-template-columns:1fr; } }
-
-    section {
+    section.section-card {
       background:var(--card);
       padding:22px;
       border-radius:18px;
       box-shadow:0 8px 24px #00000025;
+      margin-bottom:24px;
     }
-    h2 { margin:0 0 12px; font-size:20px; }
-    ul { margin:0; padding-left:18px; }
-    ul li { margin-bottom:10px; }
+    section.section-card h2 {
+      font-size:20px;
+      margin:0 0 12px;
+      line-height:1.3;
+      color:var(--text);
+    }
+
+    .two-col-flex {
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+    }
+    .col-left {
+      flex:1 1 55%;
+      min-width:260px;
+    }
+    .col-right {
+      flex:1 1 40%;
+      min-width:240px;
+    }
+
+    .small-heading {
+      font-size:14px;
+      font-weight:600;
+      margin:16px 0 6px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
+
+    ul { padding-left:18px; margin:0; }
+    ul li { margin-bottom:10px; color:var(--text); }
     a { color:var(--accent); text-decoration:none; }
     a:hover { text-decoration:underline; }
+    .list-title { font-weight:600; color:var(--text); }
+
+    .bubble-blocks {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin:10px 0 16px;
+    }
+    @media (max-width:500px){
+      .bubble-blocks { grid-template-columns:1fr; }
+    }
+    .bubble {
+      background:#ffffff10;
+      border:1px solid #ffffff20;
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:14px;
+      line-height:1.4;
+      color:var(--text);
+    }
+
+    .skills-list li {
+      list-style:none;
+      margin-bottom:6px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      line-height:1.4;
+    }
+    .skill-head {
+      font-weight:600;
+      min-width:110px;
+      color:var(--text);
+    }
+    .btn {
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:12px;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      margin-top:12px;
+    }
+    .btn i {
+      margin-right:6px;
+    }
 
     .footer {
       text-align:center;
-      margin-top:28px;
+      margin-top:40px;
       color:var(--muted);
       font-size:14px;
+    }
+
+    .subtle {
+      font-size:14px;
+      color:var(--muted);
+      margin-top:8px;
+      line-height:1.4;
+      text-align:right;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Contact Bar -->
+  <!-- CONTACT BAR -->
   <div class="topbar">
     <div class="topbar-inner">
-      <span> <a href="mailto:a.reza.khanari@gmail.com"> <i class="fa-solid fa-envelope"></i> a.reza.khanari@gmail.com </a> </span>
-      <span> <a href="https://github.com/ahmadrkh" target="_blank"> <i class="fab fa-github"></i> GitHub </a> </span>
-      <span> <a href="https://www.linkedin.com/in/ahmadreza-khanari/" target="_blank"> <i class="fa-brands fa-linkedin"></i>  LinkedIn </a> </span>
+      <span><a href="mailto:a.reza.khanari@gmail.com"><i class="fa-solid fa-envelope"></i> a.reza.khanari@gmail.com</a></span>
+      <span><a href="https://github.com/ahmadrkh" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a></span>
+      <span><a href="https://www.linkedin.com/in/ahmadreza-khanari/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></span>
     </div>
   </div>
 
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <div class="navbar-wrap">
     <nav class="navbar">
-      <a class="brand" href="index.html">
+      <a class="brand" href="#top">
         <img id="nav-avatar" alt="Ahmadreza Khanari Avatar" />
         <span>Ahmadreza Khanari</span>
       </a>
 
-      <div class="nav-links" id="desktop-links">
-        <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
-        <a href="research.html"><i class="fa-solid fa-flask"></i> Research</a>
-        <a href="teaching.html"><i class="fa-solid fa-chalkboard-user"></i> Teaching</a>
-        <a href="cv.html"><i class="fa-solid fa-file-lines"></i> CV</a>
-        <a href="contact.html"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+      <div class="nav-links">
+        <a href="#about"><i class="fa-solid fa-user"></i><span>About</span></a>
+        <a href="#research"><i class="fa-solid fa-flask"></i><span>Research</span></a>
+        <a href="#teaching"><i class="fa-solid fa-chalkboard-user"></i><span>Teaching</span></a>
+        <a href="#cv"><i class="fa-solid fa-file-lines"></i><span>CV</span></a>
+        <a href="#contact"><i class="fa-solid fa-paper-plane"></i><span>Contact</span></a>
       </div>
 
-      <button class="nav-toggle-btn" id="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      <button class="nav-toggle-btn" id="nav-toggle" aria-label="menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </nav>
 
+    <!-- mobile dropdown -->
     <div class="mobile-menu" id="mobile-menu">
-      <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
-      <a href="research.html"><i class="fa-solid fa-flask"></i> Research</a>
-      <a href="teaching.html"><i class="fa-solid fa-chalkboard-user"></i> Teaching</a>
-      <a href="cv.html"><i class="fa-solid fa-file-lines"></i> CV</a>
-      <a href="contact.html"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+      <a href="#about"><i class="fa-solid fa-user"></i> About</a>
+      <a href="#research"><i class="fa-solid fa-flask"></i> Research</a>
+      <a href="#teaching"><i class="fa-solid fa-chalkboard-user"></i> Teaching</a>
+      <a href="#cv"><i class="fa-solid fa-file-lines"></i> CV</a>
+      <a href="#contact"><i class="fa-solid fa-paper-plane"></i> Contact</a>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="wrap">
+  <!-- MAIN CONTENT -->
+  <div class="wrap" id="top">
+    <!-- HEADER / HERO -->
     <header class="profile-header">
       <a id="gh-link" target="_blank" rel="noopener">
         <img id="gh-avatar" alt="GitHub avatar of Ahmadreza Khanari" />
       </a>
       <div>
-        <h1>Ahmadreza Khanari</h1>
+        <h1 style="line-height:1.2;">Ahmadreza Khanari</h1>
         <div class="muted">
           Final-year undergraduate in Computer Engineering @ Sharif University of Technology.<br/>
           3D Computer Vision • Robotic Perception • Language-Vision Models
@@ -260,33 +368,193 @@
       </div>
     </header>
 
-    <div class="row">
-      <section>
-        <h2>About</h2>
-        <p>I study how machines perceive the world through geometry, depth, and multimodal grounding. My research blends classical 3D vision with learning-based robotic perception.</p>
-        <ul>
-          <li>3D reconstruction and depth estimation</li>
-          <li>Robotic vision and multi-sensor fusion</li>
-          <li>Language–vision interaction</li>
-        </ul>
-      </section>
+    <!-- ABOUT -->
+    <section class="section-card" id="about">
+      <h2><i class="fa-solid fa-user"></i> About</h2>
 
-      <section>
-        <h2>Highlights</h2>
-        <ul>
-          <li><strong>3D Depth Mapping for Autonomous Vehicles</strong> — Multi-camera homography + nuScenes dataset analysis.</li>
-          <li><strong>Persian TTS Modeling</strong> — Speech synthesis with minimal perceptual distortion.</li>
-          <li><strong>Teaching Assistant</strong> — Web Programming, Software Engineering, Signals & Systems.</li>
-        </ul>
-        <a class="btn" href="Ahmadreza_CV_Apply.pdf" download><i class="fa-solid fa-download"></i> Download CV</a>
-      </section>
-    </div>
+      <div class="two-col-flex">
+        <div class="col-left">
+          <p>
+            I study how machines perceive and understand the world: depth, geometry, interaction, and vision–language grounding. I work at the intersection of classical vision (homography, stitching, geometry) and deep models for perception and control.
+          </p>
+
+          <div class="bubble-blocks">
+            <div class="bubble">
+              Research: 3D reconstruction, depth estimation, multi-camera stitching,
+              robustness in autonomous driving perception.
+            </div>
+            <div class="bubble">
+              Also exploring: Persian text-to-speech models that can imitate professional announcers with minimal audible artifacts.
+            </div>
+          </div>
+
+          <div class="small-heading">Research interests</div>
+          <ul>
+            <li>3D computer vision & reconstruction</li>
+            <li>Robotic language–vision models</li>
+            <li>3D interaction</li>
+            <li>Augmented reality</li>
+          </ul>
+        </div>
+
+        <div class="col-right">
+          <div class="small-heading">Skills snapshot</div>
+          <ul class="skills-list">
+            <li><span class="skill-head">Programming:</span> Python, Java, R, C, SQL</li>
+            <li><span class="skill-head">Web:</span> Next.js, TypeScript, Tailwind CSS</li>
+            <li><span class="skill-head">AI / Vision:</span> PyTorch, OpenCV, NumPy, scikit-learn, nuScenes-devkit</li>
+            <li><span class="skill-head">Tools:</span> Git, Jupyter Notebook</li>
+            <li><span class="skill-head">Languages:</span> English (professional), Persian (native)</li>
+          </ul>
+
+          <div class="small-heading" style="margin-top:20px;">Volunteering</div>
+          <ul>
+            <li>
+              <span class="list-title">Rasta Summer School</span> — Staff / Lead (2022–2024).  
+              Ran workshops (Algorithms, Blockchain, Game Theory) for high school students; focused on teamwork and problem solving.
+            </li>
+            <li>
+              <span class="list-title">WSS (Winter Seminar Series)</span> — Technical Staff (2024), Executive Staff (2023).  
+              Helped organize technical talks and academic/professional events.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section class="section-card" id="research">
+      <h2><i class="fa-solid fa-flask"></i> Research / Projects</h2>
+
+      <div class="small-heading">Research experience</div>
+      <ul>
+        <li>
+          <span class="list-title">3D Depth Map for the Application of Autonomous Vehicles</span> —  
+          Built panoramic stitched views from multi-camera images using homography + EWMA to cover blind spots.  
+          Analyzed nuScenes with DeepInteraction for object detection and depth robustness.  
+          <br/>
+          <a href="https://github.com/arezekhanari/FCV-project" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> Project repo
+          </a>
+        </li>
+        <li>
+          <span class="list-title">Persian Text-to-Speech</span> —  
+          Designed a TTS system to mimic professional announcers with minimal perceptual difference from real speech, targeting continuous broadcast use.
+        </li>
+      </ul>
+
+      <div class="small-heading">Technical work</div>
+      <ul>
+        <li>
+          <span class="list-title">Numerical Computations — Coding Guides</span> —  
+          Authored Jupyter notebooks and Python implementations to support Numerical Computations students.
+          <br/>
+          <a href="https://github.com/numerical-computations-sut/Course-Materials/tree/main" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> Course-Materials repo
+          </a>
+        </li>
+        <li>
+          <span class="list-title">Course GPT</span> —  
+          A full-stack course planner / generator app (React + Django).  
+          Worked on UI (React/MUI) and coordination with Django backend API.
+          <br/>
+          <a href="https://github.com/satayyeb/course-gpt-frontend" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> Frontend repo
+          </a>
+        </li>
+      </ul>
+
+      <div class="small-heading">Industry experience</div>
+      <ul>
+        <li>
+          <span class="list-title">Front-End Developer — Avan Holding (Adowing)</span> (Mar 2024 – Mar 2025)<br/>
+          Built internal tools for employees (profiles, interests, task tracking, timers) using Next.js, TypeScript, Tailwind CSS, DaisyUI, Redux.  
+          Focused on shipping usable interfaces in production.
+        </li>
+        <li>
+          <span class="list-title">Front-End Developer — Kafshbaf</span> (Mar 2025 – Aug 2025)<br/>
+          Worked on a bilingual B2B marketplace (suppliers ↔ bulk buyers).  
+          Stack: Next.js, TypeScript, Tailwind CSS, Shadcn.  
+          Collaborated with backend and DevOps to align UI with business needs.
+        </li>
+      </ul>
+    </section>
+
+    <!-- TEACHING -->
+    <section class="section-card" id="teaching">
+      <h2><i class="fa-solid fa-chalkboard-user"></i> Teaching Experience</h2>
+
+      <ul>
+        <li>
+          <span class="list-title">Web Programming</span> (Spring 2025) —  
+          Product Owner of the course project: defined features with student teams, assigned sprint tasks, ran weekly check-ins.
+        </li>
+        <li>
+          <span class="list-title">Software Engineering</span> (Spring 2025) —  
+          Helped design quizzes and final exam questions; graded exam responses.
+        </li>
+        <li>
+          <span class="list-title">Scientific & Technical Presentation</span> (Fall 2024) —  
+          Guided infographic design, reviewed presentations, and graded assignments.
+        </li>
+        <li>
+          <span class="list-title">Signals & Systems</span> (Fall 2024) —  
+          Designed and graded a hands-on coding assignment.
+        </li>
+        <li>
+          <span class="list-title">Basic Programming</span> (Spring 2024) —  
+          Wrote assignments on functional programming and file management, designed the final project, supervised exams.
+        </li>
+        <li>
+          <span class="list-title">Probability & Statistics</span> (Fall 2023) —  
+          Authored and graded several quizzes.
+        </li>
+        <li>
+          <span class="list-title">Numerical Computations</span> (Spring 2023 & Fall 2023) —  
+          Built coding assignments and an implementation guide for students.
+        </li>
+      </ul>
+    </section>
+
+    <!-- CV / DOWNLOAD -->
+    <section class="section-card" id="cv">
+      <h2><i class="fa-solid fa-file-lines"></i> CV</h2>
+      <p>
+        You can view my full academic CV, including coursework, projects, research experience, and detailed responsibilities in teaching and industry.
+      </p>
+      <a class="btn" href="Ahmadreza_CV_Apply.pdf" download>
+        <i class="fa-solid fa-download"></i>
+        Download CV (PDF)
+      </a>
+      <div class="subtle">Last updated October 2025</div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section-card" id="contact">
+      <h2><i class="fa-solid fa-paper-plane"></i> Contact</h2>
+      <ul style="list-style:none; padding-left:0;">
+        <li style="margin-bottom:10px;">
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:a.reza.khanari@gmail.com">a.reza.khanari@gmail.com</a>
+        </li>
+        <li style="margin-bottom:10px;">
+          <i class="fa-brands fa-github"></i>
+          <a href="https://github.com/ahmadrkh" target="_blank" rel="noopener">@ahmadrkh</a>
+          &nbsp;|&nbsp;
+          <a href="https://github.com/arezekhanari" target="_blank" rel="noopener">@arezekhanari</a>
+        </li>
+        <li style="margin-bottom:10px;">
+          <i class="fa-brands fa-linkedin"></i>
+          <a href="https://www.linkedin.com/in/ahmadreza-khanari/" target="_blank" rel="noopener">LinkedIn</a>
+        </li>
+      </ul>
+    </section>
 
     <p class="footer">© <span id="y"></span> Ahmadreza Khanari</p>
   </div>
 
   <script>
-    // Dynamic GitHub avatar + footer year
+    // dynamic avatar + github + year
     const GH_USER = 'ahmadrkh';
     const avatarUrl = `https://github.com/${GH_USER}.png`;
     document.getElementById('gh-avatar').src = avatarUrl;
@@ -294,13 +562,27 @@
     document.getElementById('gh-link').href = `https://github.com/${GH_USER}`;
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Mobile navbar toggle
-    const toggle = document.getElementById('nav-toggle');
-    const menu = document.getElementById('mobile-menu');
-    toggle.addEventListener('click', () => {
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    // mobile nav toggle
+    const toggleBtn = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    const closeMenu = () => { mobileMenu.style.display = 'none'; };
+    const openMenu  = () => { mobileMenu.style.display = 'flex'; };
+
+    toggleBtn.addEventListener('click', () => {
+      if (mobileMenu.style.display === 'flex') {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
-    Array.from(menu.querySelectorAll('a')).forEach(a => a.addEventListener('click', () => menu.style.display = 'none'));
+
+    // auto-close menu after clicking an anchor
+    Array.from(mobileMenu.querySelectorAll('a')).forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
   </script>
 </body>
 </html>
