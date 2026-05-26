@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmadreza Khanari — Academic Profile</title>
+  <meta name="description" content="Computer Engineering student at Sharif University of Technology. Research in computer vision and AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #fafaf8;
+      --bg2: #f4f4f0;
+      --border: #e2e2db;
+      --accent: #2d6a4f;
+      --accent2: #1b4332;
+      --accent-light: #d8f3dc;
+      --text: #1a1a16;
+      --muted: #6b6b5e;
+      --card: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+
+    /* ── WORK PAGE SWITCHER ── */
+    .switcher-bar {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    }
+    .switcher-link {
+      display: flex; align-items: center; gap: 10px;
+      background: #0a0f1e; color: #f1f5f9;
+      border-radius: 999px; padding: 10px 18px 10px 14px;
+      text-decoration: none; font-size: 12px; font-weight: 700;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .switcher-link:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+    .switcher-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #1e2d45; border: 1.5px solid #2d4a6e;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .switcher-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .switcher-text span:first-child { font-size: 10px; font-weight: 500; color: #94a3b8; }
+    .switcher-text span:last-child { font-size: 12px; font-weight: 700; color: #f1f5f9; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 58px;
+      background: rgba(250,250,248,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Lora', serif; font-size: 15px; font-weight: 600;
+      color: var(--accent2); letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HEADER / BIO ── */
+    #hero {
+      padding: 110px 10% 70px;
+      border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start;
+    }
+    .hero-name {
+      font-family: 'Lora', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .hero-title {
+      font-size: 15px; color: var(--accent); font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero-bio {
+      font-size: 15px; color: var(--muted); line-height: 1.8;
+      max-width: 580px; margin-bottom: 28px;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; }
+    .meta-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--muted);
+    }
+    .meta-item svg { flex-shrink: 0; }
+    .meta-item a { color: var(--muted); text-decoration: none; }
+    .meta-item a:hover { color: var(--accent); }
+
+    /* Education card on the right */
+    .edu-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 24px; min-width: 240px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .edu-card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .edu-item { margin-bottom: 14px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .edu-school { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 2px; }
+    .edu-year { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 64px 10%; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 36px; }
+    .section-num { font-family: 'Lora', serif; font-size: 13px; font-style: italic; color: var(--muted); width: 24px; flex-shrink: 0; }
+    .section-title { font-family: 'Lora', serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; color: var(--text); }
+
+    /* ── RESEARCH INTERESTS ── */
+    .interests-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .interest-tag {
+      background: var(--accent-light); color: var(--accent2);
+      border: 1px solid #b7e4c7; border-radius: 999px;
+      padding: 7px 16px; font-size: 13px; font-weight: 600;
+    }
+
+    /* ── PROJECT CARDS (academic style) ── */
+    .acad-projects { display: flex; flex-direction: column; gap: 20px; }
+    .acad-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 26px 28px;
+      display: flex; gap: 22px; align-items: flex-start;
+      text-decoration: none; color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .acad-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(45,106,79,0.1); transform: translateY(-2px); }
+    .acad-card-num {
+      font-family: 'Lora', serif; font-size: 28px; font-weight: 700;
+      color: var(--border); line-height: 1; flex-shrink: 0; width: 36px;
+      padding-top: 2px;
+    }
+    .acad-card-body { flex: 1; }
+    .acad-card-type {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .acad-card-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.35; }
+    .acad-card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+    .acad-card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .acad-tag {
+      background: var(--bg2); color: var(--muted);
+      border: 1px solid var(--border); border-radius: 5px;
+      padding: 3px 9px; font-size: 11px; font-weight: 600;
+      font-family: 'Courier New', monospace;
+    }
+    .acad-card-arrow { color: var(--border); font-size: 18px; flex-shrink: 0; padding-top: 4px; transition: color 0.2s; }
+    .acad-card:hover .acad-card-arrow { color: var(--accent); }
+
+    /* Placeholder */
+    .acad-card.placeholder { opacity: 0.5; cursor: default; border-style: dashed; }
+    .acad-card.placeholder:hover { transform: none; border-color: var(--border); box-shadow: none; }
+
+    /* ── SKILLS (academic) ── */
+    .skills-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .skill-group-title { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .skill-list { list-style: none; }
+    .skill-list li { font-size: 13px; color: var(--text); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    #contact-acad { background: var(--bg2); }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--border); background: var(--card);
+      color: var(--text); transition: all 0.2s;
+    }
+    .contact-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .contact-btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .contact-btn-primary:hover { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+
+    footer {
+      padding: 24px 10%; text-align: center;
+      font-size: 12px; color: var(--muted);
+      background: var(--bg2); border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; gap: 32px; padding: 100px 6% 56px; }
+      section { padding: 52px 6%; }
+      .acad-card { flex-direction: column; gap: 10px; }
+      .acad-card-num { font-size: 20px; }
+      .switcher-bar { bottom: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Work page switcher -->
+<div class="switcher-bar">
+  <a href="./index.html" class="switcher-link">
+    <div class="switcher-icon">💼</div>
+    <div class="switcher-text">
+      <span>Also see my</span>
+      <span>Work Portfolio →</span>
+    </div>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ahmadreza Khanari</div>
+  <div class="nav-links">
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact-acad">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO / BIO -->
+<div id="hero">
+  <div>
+    <h1 class="hero-name">Ahmadreza<br />Khanari</h1>
+    <p class="hero-title">Computer Engineering · Sharif University of Technology</p>
+    <p class="hero-bio">
+      I'm a Computer Engineering student at Sharif University of Technology with
+      research interests in computer vision, deep learning, and AI for healthcare.
+      I enjoy working on problems that sit at the boundary of algorithms and
+      real-world impact.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Tehran, Iran
+      </span>
+      <span class="meta-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:ahmadrezakhanari02@gmail.com">ahmadrezakhanari02@gmail.com</a>
+      </span>
+      <span class="meta-item">
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <a href="https://github.com/ahmadrkh" target="_blank" rel="noopener">github.com/ahmadrkh</a>
+      </span>
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-card-title">Education</div>
+    <div class="edu-item">
+      <div class="edu-degree">B.Sc. Computer Engineering</div>
+      <div class="edu-school">Sharif University of Technology</div>
+      <div class="edu-year">2021 — 2026 (expected)</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH INTERESTS -->
+<section id="research">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Research Interests</h2>
+  </div>
+  <div class="interests-list">
+    <span class="interest-tag">Computer Vision</span>
+    <span class="interest-tag">Deep Learning</span>
+    <span class="interest-tag">Medical Image Analysis</span>
+    <span class="interest-tag">3D Scene Understanding</span>
+    <span class="interest-tag">Synthetic Data Generation</span>
+    <span class="interest-tag">AI for Healthcare</span>
+  </div>
+</section>
+
+<!-- ACADEMIC PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+  </div>
+  <div class="acad-projects">
+
+    <!-- BACHELOR PROJECT — update when confirmed -->
+    <a href="https://github.com/ahmadrkh" target="_blank" rel="noopener" class="acad-card">
+      <div class="acad-card-num">01</div>
+      <div class="acad-card-body">
+        <div class="acad-card-type">Bachelor's Project · Ongoing</div>
+        <div class="acad-card-title">
+          <!-- TODO: Replace with actual project title -->
+          Deep Learning for Medical Image Analysis
+        </div>
+        <div class="acad-card-desc">
+          <!-- TODO: Replace with actual description -->
+          Research project at Sharif University of Technology.
+          Update this with your project title, research question, methodology,
+          and any preliminary results or contributions.
+        </div>
+        <div class="acad-card-tags">
+          <span class="acad-tag">Python</span>
+          <span class="acad-tag">PyTorch</span>
+          <span class="acad-tag">Deep Learning</span>
+          <span class="acad-tag">Sharif · 2025</span>
+        </div>
+      </div>
+      <div class="acad-card-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/ahmadrkh/Stereo-Vision" target="_blank" rel="noopener" class="acad-card">
+      <div class="acad-card-num">02</div>
+      <div class="acad-card-body">
+        <div class="acad-card-type">Course Project · Computer Vision</div>
+        <div class="acad-card-title">Stereo Vision — Depth Estimation from Image Pairs</div>
+        <div class="acad-card-desc">
+          Implemented a stereo matching pipeline from scratch to estimate scene depth from
+          rectified stereo camera pairs. Used block matching (SAD/SSD) and disparity map
+          computation without relying on OpenCV's built-in stereo solvers, in order to
+          deeply understand the underlying algorithm.
+        </div>
+        <div class="acad-card-tags">
+          <span class="acad-tag">Python</span>
+          <span class="acad-tag">OpenCV</span>
+          <span class="acad-tag">NumPy</span>
+          <span class="acad-tag">Stereo Matching</span>
+          <span class="acad-tag">Sharif · CV Course</span>
+        </div>
+      </div>
+      <div class="acad-card-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- TECHNICAL SKILLS (academic focus) -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Technical Skills</h2>
+  </div>
+  <div class="skills-cols">
+    <div>
+      <div class="skill-group-title">AI / ML</div>
+      <ul class="skill-list">
+        <li>PyTorch</li>
+        <li>OpenCV</li>
+        <li>NumPy / SciPy</li>
+        <li>Scikit-learn</li>
+        <li>Matplotlib</li>
+      </ul>
+    </div>
+    <div>
+      <div class="skill-group-title">Languages</div>
+      <ul class="skill-list">
+        <li>Python</li>
+        <li>TypeScript</li>
+        <li>JavaScript</li>
+        <li>C / C++</li>
+      </ul>
+    </div>
+    <div>
+      <div class="skill-group-title">Tools</div>
+      <ul class="skill-list">
+        <li>Git / GitHub</li>
+        <li>Linux / SSH</li>
+        <li>Jupyter</li>
+        <li>LaTeX</li>
+      </ul>
+    </div>
+    <div>
+      <div class="skill-group-title">Web (applied)</div>
+      <ul class="skill-list">
+        <li>React / Next.js</li>
+        <li>TypeScript</li>
+        <li>Prisma / SQL</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact-acad">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <p style="font-size:14px; color:var(--muted); margin-bottom:24px; max-width:480px; line-height:1.8;">
+    I'm open to research collaborations, internship opportunities in AI/CV,
+    and academic discussions. Feel free to reach out.
+  </p>
+  <div class="contact-row">
+    <a href="mailto:ahmadrezakhanari02@gmail.com" class="contact-btn contact-btn-primary">✉ Send Email</a>
+    <a href="https://github.com/ahmadrkh" target="_blank" rel="noopener" class="contact-btn">GitHub ↗</a>
+    <a href="https://linkedin.com/in/ahmadrkh" target="_blank" rel="noopener" class="contact-btn">LinkedIn ↗</a>
+    <a href="./index.html" class="contact-btn">💼 Work Portfolio ↗</a>
+  </div>
+</section>
+
+<footer>
+  <p>Ahmadreza Khanari · Sharif University of Technology · 2025 ·
+    <a href="./index.html">Work Portfolio</a>
+  </p>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id ? 'var(--text)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
