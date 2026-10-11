@@ -88,15 +88,19 @@ export default function CvPage() {
 
         <CvSection title="Education">
           {profile.education.map((e) => (
-            <div key={e.title} className="avoid-break">
-              <Row left={e.org} right={e.period} sub={`${e.title}, ${e.location}`} />
-              <ul className="mt-1 list-disc space-y-0.5 pl-5 marker:text-faint">
-                <li>
-                  Bachelor&apos;s project: <span className="italic">{profile.thesis.title}</span> — supervised by{" "}
-                  {profile.thesis.supervisor}
-                </li>
-                <li>Relevant coursework: {profile.coursework.join(", ")}</li>
-              </ul>
+            <div key={e.degree} className="avoid-break">
+              <Row left={e.org} right={e.period} sub={`${e.degree}, ${e.location}`} />
+              {(e.thesis || e.coursework) && (
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 marker:text-faint">
+                  {e.thesis && (
+                    <li>
+                      Bachelor&apos;s project: <span className="italic">{e.thesis.title}</span> — supervised by{" "}
+                      {e.thesis.supervisor}
+                    </li>
+                  )}
+                  {e.coursework && <li>Relevant coursework: {e.coursework.join(", ")}</li>}
+                </ul>
+              )}
             </div>
           ))}
         </CvSection>
@@ -166,20 +170,6 @@ export default function CvPage() {
           {profile.service.map((e) => (
             <CvEntry key={e.title} e={e} />
           ))}
-        </CvSection>
-
-        <CvSection title="References">
-          <div className="grid gap-5 sm:grid-cols-2 print:grid-cols-2">
-            {profile.references.map((r) => (
-              <div key={r.name} className="avoid-break text-sm">
-                <p className="font-semibold">{r.name}</p>
-                <p className="text-muted">{r.title}</p>
-                <p className="text-muted">{r.org}</p>
-                <p className="italic text-muted">{r.relation}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-sm text-muted">Contact details available on request.</p>
         </CvSection>
 
         <p className="mt-10 text-right text-xs italic text-faint">Last updated {profile.cvUpdated}</p>

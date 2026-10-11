@@ -16,6 +16,15 @@ export type Entry = {
   links?: Link[];
 };
 
+export type Education = {
+  degree: string;
+  org: string;
+  location: string;
+  period: string;
+  thesis?: { title: string; supervisor: string };
+  coursework?: string[];
+};
+
 export type Project = {
   title: string;
   context: string;
@@ -35,24 +44,20 @@ export type TeachingEntry = {
 
 export const profile = {
   name: "Ahmadreza Khanari",
-  headline: "Computer Engineer · Machine Learning & Computer Vision",
-  affiliation: "B.Sc. Computer Engineering, Sharif University of Technology",
-  location: "Tehran, Iran",
+  headline: "M.Sc. Student in Computer Science · Machine Learning & Computer Vision",
+  affiliation: "Vrije Universiteit Brussel (VUB)",
+  location: "Brussels, Belgium",
   email: "a.reza.khanari@gmail.com",
   site: "https://ahmadrkh.github.io",
   cvUpdated: "October 2026",
-  thesis: {
-    title: "Voice Cloning with Multi-Announcer Support",
-    supervisor: "Prof. Hossein Sameti",
-  },
   links: {
     github: "https://github.com/ahmadrkh",
-    linkedin: "https://linkedin.com/in/ahmadrkh",
+    linkedin: "https://www.linkedin.com/in/ahmadreza-khanari/",
   },
 
   bio: [
-    "I am a computer engineer with research interests in computer vision, deep learning, and statistical machine learning. I studied Computer Engineering at Sharif University of Technology, where I worked on multi-camera 3D perception for autonomous vehicles under the supervision of Prof. Shohreh Kasaei, and completed my bachelor's project on multi-speaker voice cloning under Prof. Hossein Sameti.",
-    "Across these projects I have built end-to-end pipelines — from data processing and geometric vision to fine-tuning large pretrained models — and I care about understanding methods from first principles. Alongside research, I have served as a teaching assistant for seven courses across eleven terms and spent a year and a half as a front-end engineer shipping production software.",
+    "I am a master's student in Computer Science at Vrije Universiteit Brussel (VUB), with research interests in computer vision, deep learning, and statistical machine learning. I received my B.Sc. in Computer Engineering from Sharif University of Technology in February 2026, where I worked on multi-camera 3D perception for autonomous vehicles under the supervision of Prof. Shohreh Kasaei, and completed my bachelor's project on multi-speaker voice cloning under Prof. Hossein Sameti.",
+    "Across these projects I have built end-to-end pipelines — from data processing and geometric vision to fine-tuning large pretrained models — and I care about understanding methods from first principles. Alongside research, I have served as a teaching assistant for seven courses across eleven terms and spent nearly two years as a front-end engineer shipping production software.",
   ],
 
   interests: [
@@ -64,23 +69,32 @@ export const profile = {
 
   education: [
     {
-      title: "B.Sc. in Computer Engineering",
+      degree: "M.Sc. in Computer Science",
+      org: "Vrije Universiteit Brussel (VUB)",
+      location: "Brussels, Belgium",
+      period: "Sep 2026 – present",
+    },
+    {
+      degree: "B.Sc. in Computer Engineering",
       org: "Sharif University of Technology",
       location: "Tehran, Iran",
-      period: "Oct 2020 – Mar 2026",
+      period: "Oct 2020 – Feb 2026",
+      thesis: {
+        title: "Voice Cloning with Multi-Announcer Support",
+        supervisor: "Prof. Hossein Sameti",
+      },
+      coursework: [
+        "Engineering Probability & Statistics",
+        "Data Structures & Algorithms",
+        "Design of Algorithms",
+        "Fundamental 3D Computer Vision",
+        "Numerical Computation",
+        "Computer Simulation",
+        "Signals & Systems",
+        "Systems Analysis & Design",
+      ],
     },
-  ] satisfies Entry[],
-
-  coursework: [
-    "Engineering Probability & Statistics",
-    "Data Structures & Algorithms",
-    "Design of Algorithms",
-    "Fundamental 3D Computer Vision",
-    "Numerical Computation",
-    "Computer Simulation",
-    "Signals & Systems",
-    "Systems Analysis & Design",
-  ],
+  ] satisfies Education[],
 
   research: [
     {
@@ -195,6 +209,20 @@ export const profile = {
   experience: [
     {
       title: "Front-End Developer",
+      org: "Viraaweb",
+      location: "Tehran, Iran",
+      period: "Jun 2026 – Aug 2026",
+      bullets: [
+        "Built front-end features for Bagotag, a custom e-commerce store developed by Viraaweb, integrating them with back-end REST APIs.",
+      ],
+      tags: ["Next.js", "REST APIs"],
+      links: [
+        { label: "Bagotag", href: "https://www.bagotag.com/" },
+        { label: "Viraaweb", href: "https://www.viraaweb.com/" },
+      ],
+    },
+    {
+      title: "Front-End Developer",
       org: "Kafshbaf",
       period: "Mar 2025 – Aug 2025",
       bullets: [
@@ -242,26 +270,5 @@ export const profile = {
   languages: [
     { name: "Persian", level: "Native" },
     { name: "English", level: "TOEFL iBT 88 (R 25 · L 21 · S 21 · W 21), Dec 2025" },
-  ],
-
-  references: [
-    {
-      name: "Prof. Shohreh Kasaei",
-      title: "Professor, Department of Computer Engineering; Director, Image Processing Laboratory",
-      org: "Sharif University of Technology",
-      relation: "Supervisor — 3D computer vision project",
-    },
-    {
-      name: "Dr. Mohsen Ansari",
-      title: "Assistant Professor, Department of Computer Engineering; Director, Cyber-Physical Systems Laboratory",
-      org: "Sharif University of Technology",
-      relation: "Supervisor — industrial web development project",
-    },
-    {
-      name: "Dr. Sepideh Safari",
-      title: "Lecturer, Department of Computer Engineering; Senior Postdoctoral Researcher, IPM",
-      org: "Sharif University of Technology",
-      relation: "Supervisor — industrial web development project",
-    },
   ],
 };

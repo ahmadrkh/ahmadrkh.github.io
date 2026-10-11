@@ -6,11 +6,11 @@ import { CapIcon, FileIcon, GitHubIcon, LinkedInIcon, MailIcon, PinIcon } from "
 
 function Sidebar() {
   const items = [
-    { icon: <CapIcon />, content: "Sharif University of Technology" },
+    { icon: <CapIcon />, content: profile.affiliation },
     { icon: <PinIcon />, content: profile.location },
     { icon: <MailIcon />, content: <ExtLink href={`mailto:${profile.email}`}>{profile.email}</ExtLink> },
     { icon: <GitHubIcon />, content: <ExtLink href={profile.links.github}>github.com/ahmadrkh</ExtLink> },
-    { icon: <LinkedInIcon />, content: <ExtLink href={profile.links.linkedin}>linkedin.com/in/ahmadrkh</ExtLink> },
+    { icon: <LinkedInIcon />, content: <ExtLink href={profile.links.linkedin}>linkedin.com/in/ahmadreza-khanari</ExtLink> },
   ];
 
   return (
@@ -76,16 +76,20 @@ export default function Home() {
               </div>
               <div className="rounded-lg border border-line bg-surface p-5">
                 <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-faint">Education</h3>
-                {profile.education.map((e) => (
-                  <div key={e.title}>
-                    <p className="font-medium">{e.title}</p>
-                    <p className="text-muted">{e.org}</p>
-                    <p className="text-sm text-faint">{e.period}</p>
-                    <p className="mt-2 text-sm text-muted">
-                      Thesis: <span className="italic">{profile.thesis.title}</span>
-                    </p>
-                  </div>
-                ))}
+                <div className="space-y-4">
+                  {profile.education.map((e) => (
+                    <div key={e.degree}>
+                      <p className="font-medium">{e.degree}</p>
+                      <p className="text-muted">{e.org}</p>
+                      <p className="text-sm text-faint">{e.period}</p>
+                      {e.thesis && (
+                        <p className="mt-1 text-sm text-muted">
+                          Thesis: <span className="italic">{e.thesis.title}</span>
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </Section>

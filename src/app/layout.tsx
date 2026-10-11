@@ -11,7 +11,7 @@ const serif = Source_Serif_4({
 });
 
 const description =
-  "Computer engineer (B.Sc., Sharif University of Technology) working on computer vision, deep learning, and speech synthesis.";
+  "M.Sc. Computer Science student at Vrije Universiteit Brussel (B.Sc., Sharif University of Technology) working on computer vision, deep learning, and speech synthesis.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.site),
