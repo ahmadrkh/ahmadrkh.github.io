@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #fbfaf7;
+  --surface: #ffffff;
+  --ink: #1a1d21;
+  --muted: #5d6570;
+  --faint: #8a919a;
+  --line: #e4e1d9;
+  --accent: #1f4e79;
+  --accent-soft: #eaf0f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f1215;
+    --surface: #161a1f;
+    --ink: #e7e9ec;
+    --muted: #a0a8b2;
+    --faint: #737c86;
+    --line: #272d35;
+    --accent: #8fb6e0;
+    --accent-soft: #1a2633;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+/* CV page: print as a clean A4 document */
+@page {
+  size: A4;
+  margin: 14mm 15mm;
+}
+
+@media print {
+  :root {
+    --paper: #ffffff;
+    --surface: #ffffff;
+    --ink: #111111;
+    --muted: #444444;
+    --faint: #666666;
+    --line: #cccccc;
+    --accent: #1f4e79;
+  }
+  html {
+    font-size: 13px;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .avoid-break {
+    break-inside: avoid;
+  }
+}
